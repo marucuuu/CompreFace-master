@@ -1,0 +1,44 @@
+services:
+  - type: web
+    name: compreface-api
+    env: docker
+    dockerfilePath: ./Dockerfile.api
+    plan: starter
+    envVars:
+      - key: DB_URL
+        fromDatabase:
+          name: compreface-db
+          property: connectionString
+      - key: SERVER_PORT
+        value: 8000
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    healthCheckPath: /
+
+  - type: web
+    name: compreface-fe
+    env: docker
+    dockerfilePath: ./Dockerfile.fe
+    plan: starter
+    envVars:
+      - key: API_URL
+        value: https://compreface-api.onrender.com
+      - key: PORT
+        value: 3000
+    healthCheckPath: /
+
+  - type: web
+    name: compreface-admin
+    env: docker
+    dockerfilePath: ./Dockerfile.admin
+    plan: starter
+    envVars:
+      - key: DB_URL
+        fromDatabase:
+          name: compreface-db
+          property: connectionString
+      - key: SERVER_PORT
+        value: 8001
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod
+    healthCheckPath: /

@@ -1,1 +1,1 @@
-FROM exadel/compreface-api:latest
+FROM exadel/compreface-api:1.3.0
