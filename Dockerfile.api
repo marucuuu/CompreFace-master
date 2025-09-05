@@ -1,0 +1,2 @@
+FROM exadel/compreface-api:latest
+# Render automatically runs CMD from the base image
